@@ -1,0 +1,4626 @@
+@prefix nlpeval: <http://example.org/nlpeval/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+nlpeval:Publication rdf:type rdfs:Class . 
+
+nlpeval:authors rdfs:domain nlpeval:Publication ;
+  rdfs:range xsd:String.
+nlpeval:link rdfs:domain nlpeval:Publication ;
+  rdfs:range xsd:String.
+
+nlpeval:Dataset rdfs:type rdfs:Class.
+nlpeval:RACE rdf:type nlpeval:Dataset .
+nlpeval:RACE-M rdf:type nlpeval:Dataset .
+nlpeval:RACE-H rdf:type nlpeval:Dataset .
+nlpeval:DREAM rdf:type nlpeval:Dataset .
+nlpeval:SQuAD rdf:type nlpeval:Dataset .
+
+nlpeval:Result rdf:type rdfs:Class . 
+nlpeval:dataset rdfs:domain nlpeval:Result; rdfs:range nlpeval:Dataset .
+nlpeval:metric rdfs:domain nlpeval:Result; rdfs:range nlpeval:Metric .
+nlpeval:value rdfs:domain nlpeval:Result; rdfs:range xsd:double .
+nlpeval:date rdfs:domain nlpeval:Result; rdfs:range xsd:date .
+
+nlpeval:Metric rdf:type rdfs:Class . 
+nlpeval:accuracy rdf:type nlpeval:Metric .
+nlpeval:F1 rdf:type nlpeval:Metric .
+nlpeval:EM rdf:type nlpeval:Metric .
+
+nlpeval:Model rdf:type rdfs:Class . 
+nlpeval:modelname rdfs:domain nlpeval:Model ;
+  rdfs:range xsd:String .
+nlpeval:modelname rdfs:subPropertyOf rdfs:label .
+nlpeval:publication rdfs:domain nlpeval:Model ;
+  rdfs:range nlpeval:Publication.
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "ALBERT"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/1909.11942"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2019-09-26"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "86.5"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2019-09-26"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "89.0"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2019-09-26"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "85.5"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "ALBERT (Single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-02-24"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "88.592"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-02-24"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "91.286"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "ALBERT (ensemble model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/1909.11942"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-09-18"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "89.731"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-09-18"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "92.215"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "ALBERT (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/1909.11942"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2019-09-26"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "89.4"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2019-09-26"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "91.2"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2019-09-26"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "88.6"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:DREAM ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "na"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-09-18"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "89.731"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-09-18"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "92.215"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "ALBERT (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/1909.11942"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-09-16"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "88.107"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-09-16"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "90.902"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "ALBERT + DAAF + Verifier (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-03-12"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "90.386"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-03-12"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "92.777"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "ALBERT + DUMA"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/2001.09415"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2020-02-08"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "88.0"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2020-02-08"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "90.9"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2020-02-08"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "86.7"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "ALBERT + DUMA (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/2001.09415"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2020-03-18"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "89.8"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2020-03-18"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "92.6"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2020-03-18"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "88.7"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "ALBERT + MTDA + SFVerifier (ensemble model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://www.senseforth.ai/"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-04-18"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "89.235"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-04-18"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "91.739"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "ALBERT + SFVerifier (ensemble model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://www.senseforth.ai/"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-04-15"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "89.133"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-04-15"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "91.666"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "ALBERT + SFVerifier (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://www.senseforth.ai/"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-01-07"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "88.197"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-01-07"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "90.830"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "ALBERT 1.1 (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-02-10"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "87.700"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-02-10"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "90.588"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "ALBERT+Entailment DA (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-12-08"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "88.761"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-12-08"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "91.745"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "ALBERT+Entailment DA Verifier (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-12-08"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "87.847"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-12-08"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "91.265"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "ALBERT+RL (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-02-29"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "87.870"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-02-29"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "90.823"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "ALBERT-xxlarge + DUMA"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/2001.09415"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:DREAM ;
+		nlpeval:date "2020-02-05"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "90.4"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "ALBERT-xxlarge + DUMA + Multi-Task Learning"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/2003.04992"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:DREAM ;
+		nlpeval:date "2020-02-26"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "91.8"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "ALBert-LSTM (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-04-08"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "89.224"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-04-08"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "91.853"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "ARSG-BERT (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://active.ai"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-19"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "74.746"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-19"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "78.227"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "ATB (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-05-14"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "82.882"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-05-14"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "86.002"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Albert_Verifier_AA_Net (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-02-25"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "89.743"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-02-25"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "92.180"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Amazon Mechanical Turker"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/pdf/1704.04683.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2017-04-15"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "73.3"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2017-04-15"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "85.1"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2017-04-15"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "69.4"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "AoA + DA + BERT (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-11-16"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "82.374"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-11-16"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "85.310"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "AoA + DA + BERT (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-11-16"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "81.178"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-11-16"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "84.251"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-11-09"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "80.005"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-11-09"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "83.061"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT + ConvLSTM + MTL + Verifier (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-03-15"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "86.730"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-03-15"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "89.286"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT + ConvLSTM + MTL + Verifier (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-03-13"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "84.924"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-03-13"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "88.204"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT + DAE + AoA (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-03-20"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "87.147"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-03-20"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "89.474"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT + DAE + AoA (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-03-16"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "85.884"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-03-16"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "88.621"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT + DCMN+"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/1908.11511"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2019-08-30"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "75.8"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2019-08-30"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "79.3"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2019-08-30"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "74.4"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT + MMFT + ADA (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-01-15"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "85.082"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-01-15"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "87.615"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT + MMFT + ADA (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-01-14"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "83.040"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-01-14"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "85.892"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT + Multiple-CNN (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-11-08"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "84.202"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-11-08"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "86.767"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT + N-Gram Masking + Synthetic Self-Training (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://github.com/google-research/bert"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-03-05"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "86.673"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-03-05"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "89.147"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT + N-Gram Masking + Synthetic Self-Training (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://github.com/google-research/bert"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-03-05"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "85.150"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-03-05"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "87.715"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT + NeurQuRI (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-02-28"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "82.713"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-02-28"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "85.584"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT + NeurQuRI (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-02-15"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "81.257"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-02-15"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "84.342"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT + Sparse-Transformer"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-02-12"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "79.948"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-02-12"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "83.023"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT + Synthetic Self-Training (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://github.com/google-research/bert"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-01-10"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "84.292"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-01-10"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "86.967"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT + Synthetic Self-Training (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://github.com/google-research/bert"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-01-10"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "82.972"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-01-10"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "85.810"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT + UDA (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-02-19"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "80.005"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-02-19"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "83.208"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT + UnAnsQ (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-03-07"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "80.749"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-03-07"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "83.851"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT + WIAN (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-04-24"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "78.650"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-04-24"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "81.497"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT finetune baseline (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-13"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "83.536"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-13"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "86.096"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT finetune baseline (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-12"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "82.126"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-12"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "84.820"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT uncased (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-03-07"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "79.745"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-03-07"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "83.020"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT with Something (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-02-26"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "83.051"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-02-26"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "85.737"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT with Something (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-02-25"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "81.110"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-02-25"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "84.386"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT+AC (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-14"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "78.052"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-14"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "81.174"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT+Answer Verifier (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-11-14"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "71.666"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-11-14"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "75.457"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT-Base"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/pdf/1810.04805.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2019-01-23"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "65.0"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2019-01-23"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "71.7"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2019-01-23"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "62.3"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:DREAM ;
+		nlpeval:date "2019-04-23"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "63.2"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "na"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "na"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT-Base (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-04-20"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "73.099"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-04-20"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "76.236"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT-Base (single)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://greenfly.ai"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-04-25"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "71.699"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-04-25"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "74.430"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT-Base + QA Pre-training (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-05-13"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "82.724"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-05-13"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "85.491"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT-Base + WAE"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "paper/kim2020learning.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:DREAM ;
+		nlpeval:date "2019-12-19"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "64.7"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT-Large"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/pdf/1810.04805.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2019-01-23"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "67.9"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2019-01-23"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "75.6"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2019-01-23"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "64.7"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:DREAM ;
+		nlpeval:date "2019-04-25"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "66.8"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "na"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "na"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT-Large + WAE"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "paper/kim2020learning.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:DREAM ;
+		nlpeval:date "2019-12-19"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "69.0"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT-Large-Cased"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-02-25"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "79.610"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-02-25"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "82.692"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT-base"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-04-23"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "72.072"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-04-23"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "75.513"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT-large+UBFT (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-02-28"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "81.573"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-02-28"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "84.535"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERTBase (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-04-25"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "72.072"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-04-25"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "75.513"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERTSP (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "http://www.techkg.cn/--please"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-09-29"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "85.838"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-09-29"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "88.921"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT_BASE"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://github.com/NoviScl/BERT-RACE"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2019-01-23"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "65.0"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2019-01-23"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "71.7"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2019-01-23"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "62.3"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT_LARGE"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/pdf/1902.00993.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2019-02-03"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "72.0"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2019-02-03"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "76.6"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2019-02-03"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "70.1"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERT_s (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-02-28"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "81.979"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-02-28"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "84.846"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERTlarge (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-11-12"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "80.456"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-11-12"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "83.509"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BERTlarge (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-11-12"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "78.650"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-11-12"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "81.474"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BISAN (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-03-14"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "78.481"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-03-14"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "81.531"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BISAN-CC (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-04-04"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "80.208"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-04-04"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "83.149"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BNDVnet (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-06-19"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "85.003"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-06-19"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "87.833"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BSAE AddText (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-06-27"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "63.338"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-06-27"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "67.422"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Bert"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://senseforth.ai"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-05-29"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "80.422"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-05-29"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "83.118"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Bert-raw (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-03-20"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "83.604"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-03-20"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "86.036"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Bert-raw (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-02-16"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "80.343"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-02-16"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "83.243"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Bert-raw (single)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-03-20"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "80.693"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-03-20"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "83.922"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BiAttention (MRU)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/pdf/1803.09074.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2018-03-24"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "50.4"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2018-03-24"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "57.7"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2018-03-24"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "47.4"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BiAttention (MRU) (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/pdf/1803.09074.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2018-03-24"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "53.3"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2018-03-24"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "60.2"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2018-03-24"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "50.3"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BiDAF + Self Attention (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-05-30"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "59.332"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-05-30"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "62.305"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BiDAF + Self Attention + ELMo (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-05-30"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "63.372"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-05-30"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "66.251"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BiDAF++ (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-09-13"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "65.651"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-09-13"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "68.866"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BiDAF++ with pair2vec (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-09-13"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "68.021"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-09-13"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "71.583"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "BiDAF-No-Answer (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-05-30"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "59.174"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-05-30"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "62.093"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Candi-Net+BERT (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-11"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "82.126"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-11"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "84.624"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Candi-Net+BERT (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-19"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "80.659"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-19"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "83.562"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Co-Matching ()"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "na"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:DREAM ;
+		nlpeval:date "2019-02-01"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "45.5"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Convolutional Spatial Attention"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/pdf/1811.08610.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2018-11-21"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "50.9"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2018-11-21"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "52.2"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2018-11-21"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "50.3"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Convolutional Spatial Attention (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/pdf/1811.08610.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2018-11-21"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "55.0"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2018-11-21"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "56.8"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2018-11-21"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "54.8"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "DCMN+ (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/1908.11511"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2019-08-30"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "84.1"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2019-08-30"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "88.5"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2019-08-30"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "82.3"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "DSW++"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/1902.00164"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:DREAM ;
+		nlpeval:date "2019-02-01"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "50.1"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Distance-Based Sliding Window ()"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "na"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:DREAM ;
+		nlpeval:date "2019-02-01"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "44.6"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "DocQA + NeurQuRI (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-20"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "68.766"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-20"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "71.662"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Dual Co-Matching Network (DCMN)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/pdf/1901.09381.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2019-03-16"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "72.3"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2019-03-16"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "77.6"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2019-03-16"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "70.1"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Dual Co-Matching Network (DCMN) (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/pdf/1901.09381.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2019-03-16"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "74.1"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2019-03-16"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "79.5"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2019-03-16"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "71.8"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Dynamic Fusion Networks"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/pdf/1711.04964.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2017-11-14"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "47.4"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2017-11-14"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "51.5"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2017-11-14"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "45.7"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Dynamic Fusion Networks (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/pdf/1711.04964.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2017-11-14"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "51.2"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2017-11-14"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "55.6"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2017-11-14"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "49.4"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "EBB-Net (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-01-02"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "66.610"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-01-02"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "70.303"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "EER + FT"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/1902.08852"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:DREAM ;
+		nlpeval:date "2019-02-23"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "57.7"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "ELECTRA (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-03-06"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "88.716"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-03-06"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "91.365"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "ELECTRA+RL+EV (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-04-23"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "89.021"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-04-23"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "91.765"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "ElimiNet"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/pdf/1904.02651.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2018-07-13"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "44.5"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2018-07-13"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "44.4"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2018-07-13"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "44.5"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "FTLM++"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/1902.00164"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:DREAM ;
+		nlpeval:date "2019-02-01"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "57.4"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Finetuned Transformer LM ()"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "na"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:DREAM ;
+		nlpeval:date "2019-02-01"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "55.5"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "FusionNet++ (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/1711.07341"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-08-21"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "70.300"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-08-21"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "72.484"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "GAR + ElimiNet (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/pdf/1904.02651.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2018-07-13"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "47.2"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2018-07-13"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "47.4"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2018-07-13"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "47.4"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "GBDT++"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/1902.00164"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:DREAM ;
+		nlpeval:date "2019-02-01"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "52.8"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "GBDT++ and FTLM++ (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/1902.00164"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:DREAM ;
+		nlpeval:date "2019-02-01"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "59.5"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "GPT"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://s3-us-west-2.amazonaws.com/openai-assets/research-covers/language-unsupervised/language_understanding_paper.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2018-06-11"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "59.0"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2018-06-11"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "62.9"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2018-06-11"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "57.4"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Gated-Attention Reader ()"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "na"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:DREAM ;
+		nlpeval:date "2019-02-01"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "41.3"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "GenNet"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/2003.04360"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2020-03-03"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "75.4"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2020-03-03"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "77.3"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2020-03-03"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "79.6"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Hanvon_model (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-09-03"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "84.721"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-09-03"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "87.117"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Hierarchical Attention Flow"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://www.aaai.org/ocs/index.php/AAAI/AAAI18/paper/viewFile/16331/16177"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2018-02-02"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "46.0"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2018-02-02"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "45.0"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2018-02-02"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "46.4"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Hierarchical Co-Matching"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/pdf/1806.04068.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2018-06-11"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "50.4"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2018-06-11"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "55.8"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2018-06-11"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "48.2"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Human Ceiling Performance"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/pdf/1704.04683.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2017-04-15"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "94.5"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2017-04-15"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "95.4"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2017-04-15"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "94.2"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Insight-baseline-BERT (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-04-16"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "84.834"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-04-16"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "87.644"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "KACTEIL-MRC(GFN-Net) (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-06-25"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "68.213"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-06-25"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "70.878"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "KakaoNet2 (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-06-25"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "65.719"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-06-25"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "69.381"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "L6Net + BERT (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-11-09"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "79.181"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-11-09"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "82.259"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "LUKE (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-04-04"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "87.429"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-04-04"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "90.163"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Lunet + Verifier + BERT (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-16"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "83.469"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-16"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "86.043"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Lunet + Verifier + BERT (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-15"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "82.995"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-15"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "86.035"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "MIR-MRC(F-Net) (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-11-05"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "74.791"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-11-05"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "77.988"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "MMIPN"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-29"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "73.505"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-29"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "76.424"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "MTL (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://haptik.ai"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-03-30"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "88.107"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-03-30"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "90.902"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Megatron-BERT"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/pdf/1909.08053.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2020-03-13"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "89.5"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2020-03-13"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "91.8"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2020-03-13"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "88.6"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Megatron-BERT (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/pdf/1909.08053.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2020-03-13"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "90.9"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2020-03-13"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "93.1"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2020-03-13"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "90.0"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Multi-Level Attention Fusion(MLAF) (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-09-26"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "69.476"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-09-26"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "72.857"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "NEXYS_BASE (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-06"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "79.779"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-06"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "82.912"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Option Comparison Network (OCN)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/pdf/1903.03033.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2019-03-07"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "71.7"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2019-03-07"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "76.7"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2019-03-07"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "69.6"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Option Comparison Network (OCN) (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/pdf/1903.03033.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2019-03-07"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "73.5"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2019-03-07"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "78.4"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2019-03-07"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "71.5"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Original BERT Large Cased (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-07-22"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "79.971"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-07-22"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "83.266"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "PAML+BERT (ensemble model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-21"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "83.457"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-21"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "86.122"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "PAML+BERT (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-16"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "82.577"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-16"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "85.603"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "PwP+BERT (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-03"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "80.117"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-12-03"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "83.189"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Reading Strategies Model"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/pdf/1810.13441.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2018-10-31"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "63.8"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2018-10-31"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "69.2"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2018-10-31"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "61.5"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Reading Strategies Model (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/pdf/1810.13441.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2018-10-31"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "66.7"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2018-10-31"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "72.0"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2018-10-31"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "64.5"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Reinforced Mnemonic Reader + Answer Verifier (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/1808.05759"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-08-15"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "71.767"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-08-15"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "74.295"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Retro-Reader (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "http://arxiv.org/abs/2001.09694"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-04-05"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "90.578"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-04-05"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "92.978"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Retro-Reader on ALBERT (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "http://arxiv.org/abs/2001.09694"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-01-10"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "90.115"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-01-10"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "92.580"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Retro-Reader on ALBERT (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "http://arxiv.org/abs/2001.09694"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-01-19"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "88.107"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-01-19"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "91.419"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Retro-Reader on ELECTRA (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "http://arxiv.org/abs/2001.09694"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-03-28"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "89.562"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-03-28"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "92.052"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "RoBERTa"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/1907.11692"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2019-07-26"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "83.2"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2019-07-26"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "86.5"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2019-07-26"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "81.8"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:DREAM ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "na"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-07-20"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "86.820"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-07-20"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "89.795"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "RoBERTa (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-07-20"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "86.820"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-07-20"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "89.795"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "RoBERTa + MMM"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "http://arxiv.org/abs/1910.00458"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2019-10-01"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "85.0"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2019-10-01"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "89.1"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2019-10-01"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "83.3"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "RoBERTa+Verify (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-11-27"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "86.933"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-11-27"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "90.037"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "RoBERTa+Verify (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-11-12"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "86.448"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-11-12"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "89.586"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "RoBERTa-Large + MMM"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/1910.00458"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:DREAM ;
+		nlpeval:date "2019-10-01"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "88.9"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "SA-Net on Albert (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-04-06"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "90.724"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-04-06"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "93.011"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "SA-Net on Electra (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-04-14"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "88.851"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-04-14"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "91.486"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "SAN (ensemble model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/1712.03556"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-09-14"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "71.316"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-09-14"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "73.704"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "SAN (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/1712.03556"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-08-21"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "68.653"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-08-21"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "71.439"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "SENSEFORTH + BERT"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://senseforth.ai"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-06-21"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "83.142"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-06-21"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "85.873"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "SG-Net (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/1908.05147"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-05-14"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "86.211"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-05-14"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "88.848"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "SG-Net (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/1908.05147"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-05-14"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "85.229"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-05-14"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "87.926"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "SLQA+ (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "http://www.aclweb.org/anthology/P18-1158"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-08-28"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "71.462"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-08-28"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "74.434"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "SLQA+BERT (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "http://www.aclweb.org/anthology/P18-1158"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-11-06"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "77.003"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-11-06"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "80.209"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "ST_bl"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-02-28"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "80.140"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-02-28"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "82.962"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "SemBERT (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/1909.02209"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-04-14"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "86.166"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-04-14"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "88.886"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "SemBERT (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/1909.02209"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-04-11"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "84.800"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-04-11"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "87.864"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "SkERT-Large (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-02-10"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "87.994"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-02-10"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "90.944"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Sliding Window"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/pdf/1704.04683.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2017-04-15"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "32.2"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2017-04-15"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "37.3"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2017-04-15"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "30.4"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Sliding Window ()"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "na"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:DREAM ;
+		nlpeval:date "2019-02-01"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "42.5"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "SpanBERT (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-07-22"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "85.748"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-07-22"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "88.709"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Stanford Attentive Reader"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/pdf/1704.04683.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2017-04-15"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "43.3"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2017-04-15"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "44.2"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2017-04-15"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "43.0"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Stanford Attentive Reader ()"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "na"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:DREAM ;
+		nlpeval:date "2019-02-01"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "39.8"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "T5"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/pdf/2005.00700.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2020-05-02"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "87.1"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Tree-LSTM + BiDAF + ELMo (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-11-27"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "57.707"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-11-27"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "62.341"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Tuned ALBERT (ensemble model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "91.230"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-02-20"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value " Aditya Birla Group)"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-02-20"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "88.637"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Tuned ALBERT (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "90.532"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-02-12"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value " Aditya Birla Group)"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-02-12"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "87.847"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Tuned BERT Large Cased (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-07-22"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "82.803"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-07-22"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "85.863"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Tuned BERT-1seq Large Cased (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-07-22"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "83.751"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-07-22"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "86.594"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "UPM (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-07-26"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "88.231"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-07-26"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "90.713"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "UPM (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-07-26"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "87.193"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-07-26"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "89.934"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Unet (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/1810.06638"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-09-17"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "71.417"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-09-17"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "74.869"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Unet (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-09-14"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "69.262"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-09-14"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "72.642"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "UnifiedQA"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/pdf/2005.00700.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2020-05-02"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "89.4"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "VS^3-NET (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-07-13"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "67.897"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-07-13"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "70.884"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Word Matching ()"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "na"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:DREAM ;
+		nlpeval:date "2019-02-01"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "42.0"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "XLNET-V2-123+ (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "http://tia.today"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-12-09"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "86.403"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-12-09"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "89.148"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "XLNet"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/1906.08237"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2019-06-19"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "81.75"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2019-06-19"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "85.45"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2019-06-19"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "80.21"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "XLNet (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-11-15"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "87.926"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-11-15"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "90.689"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "XLNet + DAAF + Verifier (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-07-22"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "88.592"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-07-22"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "90.859"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "XLNet + DCMN+"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/1908.11511"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2019-08-30"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "82.8"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2019-08-30"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "86.5"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2019-08-30"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "81.3"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "XLNet + SG-Net Verifier (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/1908.05147"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-08-04"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "88.174"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-08-04"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "90.702"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "XLNet + SG-Net Verifier++ (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/abs/1908.05147"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-08-04"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "87.238"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-08-04"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "90.071"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "XLNet-Large"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://github.com/NoviScl/XLNet_DREAM"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:DREAM ;
+		nlpeval:date "2019-07-21"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "72.0"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Xlnet+Verifier"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-10-16"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "86.594"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-10-16"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "89.082"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "Xlnet+Verifier (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-08-30"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "86.572"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-08-30"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "89.063"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "YARCS (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-10-12"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "72.670"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-10-12"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "75.507"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "__Gated Attention Reader"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://arxiv.org/pdf/1704.04683.pdf"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE ;
+		nlpeval:date "2017-04-15"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "44.1"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-M ;
+		nlpeval:date "2017-04-15"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "43.7"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:RACE-H ;
+		nlpeval:date "2017-04-15"^^xsd:date ;
+		nlpeval:metric nlpeval:accuracy ;
+		nlpeval:value "44.2"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "aanet_v2.0 (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-03-13"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "88.434"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-03-13"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "90.918"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "abcNet (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-07-11"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "65.256"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-07-11"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "69.206"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "albert+KD+transfer (ensemble)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-03-27"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "89.461"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-03-27"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "92.134"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "albert+KD+transfer (single)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-04-14"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "88.298"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-04-14"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "91.078"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "albert+KD+transfer+twopass (single)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-04-21"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "89.111"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-04-21"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "91.877"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "batch2 (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-01-13"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "73.742"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2020-01-13"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "76.858"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "bert (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-04-10"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "79.971"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-04-10"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "83.184"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "eeAttNet (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+		nlpeval:link "https://www.bbdservice.com"
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-08-14"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "63.327"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-08-14"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "66.633"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "nlnet (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-09-13"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "74.272"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2018-09-13"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "77.052"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "synss (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-01-05"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "76.055"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-01-05"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "79.329"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "xlnet (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-09-13"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "84.642"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-09-13"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "88.000"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "{Anonymous} (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-03-14"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "78.876"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-03-14"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "82.524"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "{BERT-base} (single-model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-01-19"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "70.763"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-01-19"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "74.449"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "{BERTcw} (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-05-23"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "74.385"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-05-23"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "77.308"^^xsd:double
+	] .
+
+
+[]	rdf:type nlpeval:Model ;
+	nlpeval:modelname "{bert-finetuning} (single model)"@en ;
+	nlpeval:publication [
+		rdf:type nlpeval:Publication ;
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-02-02"^^xsd:date ;
+		nlpeval:metric nlpeval:EM ;
+		nlpeval:value "79.632"^^xsd:double
+	] ;
+	nlpeval:result [
+		rdf:type nlpeval:Result ;
+		nlpeval:dataset nlpeval:SQuAD ;
+		nlpeval:date "2019-02-02"^^xsd:date ;
+		nlpeval:metric nlpeval:F1 ;
+		nlpeval:value "82.852"^^xsd:double
+	] .
+
+
